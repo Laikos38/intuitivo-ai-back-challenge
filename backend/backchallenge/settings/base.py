@@ -24,8 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "backchallenge.accounts",
     "backchallenge.api",
+    "backchallenge.core",
 ]
 
 MIDDLEWARE = [

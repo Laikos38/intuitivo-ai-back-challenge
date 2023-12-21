@@ -1,4 +1,4 @@
-from backchallenge.accounts.serializers import RegisterUserSerializer
+from backchallenge.api.serializers.auth import RegisterUserSerializer
 from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
