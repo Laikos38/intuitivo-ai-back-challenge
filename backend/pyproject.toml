@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "intuitivo-ai-back-challenge"
+version = "0.1.0"
+description = "Intuitivo AI back challenge"
+authors = ["Francisco Maurino"]
+readme = "../README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0"
+django-dotenv = "^1.4.2"
+django-model-utils = "^4.3.1"
+djangorestframework = "^3.14.0"
+djangorestframework-simplejwt = "^5.3.1"
+psycopg2-binary = "^2.9.9"
+black = "^23.12.0"
+django-stubs = {extras = ["compatible-mypy"], version = "^4.2.7"}
+flake8-pyproject = "^1.2.3"
+isort = "^5.13.2"
+mypy = "^1.7.1"
+djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^3.14.5"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+exclude = ["./mypy_cache", "./.venv"]
+extend-ignore = ['E203', 'E501', 'W605']
+max-line-length = 130
+select = ['C', 'E', 'F', 'W', 'B', 'B950']
+
+[tool.isort]
+lines_after_imports = 2
+no_sections = true
+profile = "black"
+
+[tool.black]
+line-length = 130
+
+[tool.mypy]
+mypy_path = "/workspaces/intuitivo-ai-back-challenge/backend/stubs/"  # change if devcontainer is not used
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+strict = true
+implicit_reexport = true

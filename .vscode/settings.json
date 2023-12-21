@@ -1,0 +1,64 @@
+{
+    // VSCODE CONFIGS
+    "explorer.autoReveal": false,
+    "files.exclude": {
+        "**/__pycache__/**": true,
+        "**/.mypy_cache/**": true,
+        "**/.venv/**": false,
+    },
+    // PYTHON CONFIGS
+    "python.defaultInterpreterPath": "/workspaces/intuitivo-ai-back-challenge/backend/.venv/bin/python",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    // ISORT ORDERING ON SAVE
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "isort.args": [
+        "--settings-path=${workspaceFolder}/backend"
+    ],
+    // MYPY CONFIGS
+    "mypy-type-checker.interpreter": [
+        "${workspaceFolder}/backend/.venv/bin/python"
+    ],
+    "mypy-type-checker.path": [
+        "${workspaceFolder}/backend/.venv/bin/mypy",
+    ],
+    "mypy-type-checker.args": [
+        "--config-file=${workspaceFolder}/backend/pyproject.toml",
+    ],
+    "mypy-type-checker.importStrategy": "fromEnvironment",
+    // FLAKE8 CONFIGS
+    "flake8.interpreter": [
+        "${workspaceFolder}/backend/.venv/bin/python"
+    ],
+    "flake8.path": [
+        "${workspaceFolder}/backend/.venv/bin/flake8p"
+    ],
+    "flake8.args": [
+        "--toml-config=${workspaceFolder}/backend/pyproject.toml",
+    ],
+    "flake8.importStrategy": "fromEnvironment",
+    // BLACK CONFIGS
+    "black-formatter.interpreter": [
+        "${workspaceFolder}/backend/.venv/bin/python"
+    ],
+    "black-formatter.path": [
+        "${workspaceFolder}/backend/.venv/bin/black"
+    ],
+    "black-formatter.args": [
+        "--config=${workspaceFolder}/backend/pyproject.toml",
+    ],
+    "black-formatter.importStrategy": "fromEnvironment",
+    // SPELL CHECKER CONFIGS
+    "cSpell.words": [
+        "APIJSON",
+        "asgi",
+        "backchallenge",
+        "dotenv",
+        "klass",
+        "simplejwt"
+    ],
+}
