@@ -21,5 +21,5 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, image):
         request = self.context.get("request")
-        image_url = image.photo.url
+        image_url = image.image.url
         return request.build_absolute_uri(image_url)
