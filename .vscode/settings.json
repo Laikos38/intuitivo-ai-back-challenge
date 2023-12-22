@@ -58,7 +58,9 @@
         "asgi",
         "backchallenge",
         "dotenv",
+        "Intuitivo",
         "klass",
+        "REDOC",
         "simplejwt"
     ],
 }

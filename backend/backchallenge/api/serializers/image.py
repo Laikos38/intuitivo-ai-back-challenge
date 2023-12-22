@@ -5,11 +5,13 @@ from rest_framework import serializers
 class ImageSerializer(serializers.ModelSerializer):
     image_name = serializers.SerializerMethodField(read_only=True)
     image_url = serializers.SerializerMethodField(read_only=True)
+    image = serializers.ImageField(write_only=True)
 
     class Meta:
         model = Image
         fields = (
             "id",
+            "image",
             "image_name",
             "image_url",
         )

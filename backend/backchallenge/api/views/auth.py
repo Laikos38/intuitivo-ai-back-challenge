@@ -1,10 +1,24 @@
+from backchallenge.api.docs import auth as auth_docs
 from backchallenge.api.serializers.auth import RegisterUserSerializer
 from django.contrib.auth.models import User
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-class RegisterClientView(generics.CreateAPIView):
+@extend_schema(**auth_docs.ExtendRegisterUserViewSchema)
+class RegisterUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = [AllowAny]
     serializer_class = RegisterUserSerializer
+
+
+@extend_schema(**auth_docs.ExtendUserTokenObtainPairViewSchema)
+class UserTokenObtainPairView(TokenObtainPairView):
+    pass
+
+
+@extend_schema(**auth_docs.ExtendUserTokenRefreshViewSchema)
+class UserTokenRefreshView(TokenRefreshView):
+    pass

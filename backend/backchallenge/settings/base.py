@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
     "rest_framework",
     "backchallenge.api",
     "backchallenge.core",
@@ -144,7 +146,7 @@ REST_FRAMEWORK = {
     },
     "DEFAULT_RENDERER_CLASSES": [
         "backchallenge.api.renderers.api_renderer.APIJSONRenderer",
-        "rest_framework.renderers.BrowsableAPIRenderer",
+        # "rest_framework.renderers.BrowsableAPIRenderer",
     ],
     "EXCEPTION_HANDLER": "backchallenge.api.exceptions.exception_handler.api_exception_handler",
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -159,4 +161,30 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=12) if DEBUG else timedelta(minutes=5),
+}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Intuitivo AI Backend Challenge API",
+    "DESCRIPTION": """
+All responses schemas are wrapped in the next object:
+```
+{
+    "data": <endpoint-response-schema>,
+    "message": "string",
+    "ok": bool,
+    "status_code": integer
+}
+```
+    """,
+    "VERSION": "0.1.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+    "COMPONENT_SPLIT_REQUEST": True,
+    "RENDERER_WHITELIST": [
+        "backchallenge.api.renderers.api_renderer.APIJSONRenderer",
+    ],
+    "DISABLE_ERRORS_AND_WARNINGS": False,
 }
