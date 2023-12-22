@@ -17,7 +17,7 @@ class ImageSerializer(serializers.ModelSerializer):
         )
 
     def get_image_name(self, image):
-        return image.image.name
+        return image.image.name.replace("images/", "") if image.image else ""
 
     def get_image_url(self, image):
         request = self.context.get("request")

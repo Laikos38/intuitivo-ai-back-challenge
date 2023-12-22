@@ -30,12 +30,12 @@ class Command(management.base.BaseCommand):
         self.stdout.write("Registering Images instances...")
         for i, filename in enumerate(images_list):
             try:
-                self.stdout.write(f"[{i + 1}/{total}]", ending=" ")
                 if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".jpeg"):
+                    self.stdout.write(f"[{i + 1}/{total}] {filename}", ending=" ")
                     image_instance = Image()
                     image_instance.image.save(filename, ImageFile(open(images_dir + filename, "rb")))
                     image_instance.save()
-                self.stdout.write("SUCCESS")
+                    self.stdout.write("SUCCESS")
             except Exception as e:
                 self.stderr.write(f"ERROR: {e}")
         try:
