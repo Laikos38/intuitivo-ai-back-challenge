@@ -7,6 +7,7 @@ from django.urls import path
 urlpatterns = [
     path("accounts/token/", auth_views.UserTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("accounts/token/refresh/", auth_views.UserTokenRefreshView.as_view(), name="token_refresh"),
+    path("accounts/users/me/", auth_views.RetrieveUserView.as_view(), name="me"),
     path("accounts/users/", auth_views.RegisterUserView.as_view(), name="users"),
     path("images/<int:id>/", image_views.ImageRetrieveUpdateDestroyView.as_view(), name="retrieve_update_destroy_images"),
     path("images/", image_views.ImageListCreateView.as_view(), name="list_create_images"),

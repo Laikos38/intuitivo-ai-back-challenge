@@ -13,3 +13,8 @@ ExtendUserTokenRefreshViewSchema = {
     "description": "Refresh JWT token.",
     "summary": "Refresh JWT token.",
 }
+ExtendRetrieveUserViewSchema = {
+    "tags": ["Auth"],
+    "description": "Current authenticated user.",
+    "summary": "Current authenticated user.",
+}
