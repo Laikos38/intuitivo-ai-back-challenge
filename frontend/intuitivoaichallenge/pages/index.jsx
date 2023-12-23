@@ -16,8 +16,8 @@ export default function HomePage() {
   }, []);
 
 
-  if (isLoading) return <p>Loading...</p>
-  if (!me) return <p>No user data</p>
+  if (isLoading) return <div>Loading...</div>
+  if (!me) return <div>No user data</div>
 
   return (
     <div>
@@ -29,8 +29,8 @@ export default function HomePage() {
         <div className="card w-96 bg-neutral text-neutral-content">
           <div className="card-body items-center text-center">
             <h2 className="card-title">Hello there!</h2>
-            <p><strong>Username: </strong>{me.username}</p>
-            <p><strong>Email: </strong>{me.email}</p>
+            <p>Username: {me.username}</p>
+            <p>Email: {me.email}</p>
           </div>
         </div>
       </div>

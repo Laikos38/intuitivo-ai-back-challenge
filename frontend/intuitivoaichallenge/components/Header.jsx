@@ -16,16 +16,16 @@ export default function Header() {
 					<ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 						<li><NavLink href='/'>Home</NavLink></li>
 						<li><NavLink href='/images'>Images</NavLink></li>
-						{userService.userValue ? <li><a onClick={logout}>Logout</a></li> : ''}
+						<li><NavLink href='/accounts/logout'>Logout</NavLink></li>
 					</ul>
 				</div>
 				<NavLink className="btn btn-ghost text-xl" href='/'>IntuitivoAI Challenge</NavLink>
 			</div>
 			<div className="navbar-end hidden lg:flex">
 				<ul className="menu menu-horizontal px-1">
-						<li><NavLink href='/'>Home</NavLink></li>
-						<li><NavLink href='/images'>Images</NavLink></li>
-						{userService.userValue ? <li><a onClick={logout}>Logout</a></li> : ''}
+					<li><NavLink href='/'>Home</NavLink></li>
+					<li><NavLink href='/images'>Images</NavLink></li>
+					<li><NavLink href='/accounts/logout'>Logout</NavLink></li>
 				</ul>
 			</div>
 		</div>
