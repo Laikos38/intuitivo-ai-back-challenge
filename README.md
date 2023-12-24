@@ -3,7 +3,7 @@ Intuitivo AI Back Challenge
 
 ## Execute
 
-### With docker & docker compose
+### Ddocker & Docker Compose
 Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) on your OS.
 
 Then on the base app directory run:
@@ -11,7 +11,7 @@ Then on the base app directory run:
 $ docker-compose -f docker-compose.yaml up --build
 ```
 
-### Installing
+### Or... Locally
 1. Create a postgres db called `intuitivo_backchallenge`.
 2. Create a `.env` on the backend directory, with the following content:
 ```
