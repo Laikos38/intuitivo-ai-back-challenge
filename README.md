@@ -11,6 +11,8 @@ Then on the base app directory run:
 $ docker-compose -f docker-compose.yaml up --build
 ```
 
+It could happen that the table is not created at the moment that the backend is ready, if this happened please retry the command.
+
 ### Or... Locally
 1. Create a postgres db called `intuitivo_backchallenge`.
 2. Create a `.env` on the backend directory, with the following content:
