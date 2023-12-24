@@ -3,7 +3,7 @@ Intuitivo AI Back Challenge
 
 ## Execute
 
-### With docker & docker compose
+### Ddocker & Docker Compose
 Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) on your OS.
 
 Then on the base app directory run:
@@ -11,7 +11,9 @@ Then on the base app directory run:
 $ docker-compose -f docker-compose.yaml up --build
 ```
 
-### Installing
+It could happen that the table is not created at the moment that the backend is ready, if this happened please retry the command.
+
+### Or... Locally
 1. Create a postgres db called `intuitivo_backchallenge`.
 2. Create a `.env` on the backend directory, with the following content:
 ```
@@ -69,3 +71,4 @@ Things to improve:
 - Never used React or NextJS before, so there is a lot of things that I'm sure can be improved. Taking in mind that only have 5 days to code the entire project during Christmas time and working full time, I consider to be good enough.
 - Add Keypresses to navigate between images during annotations.
 - Dont use development server on docker compose.
+- Add on screen indications on annotations page.
