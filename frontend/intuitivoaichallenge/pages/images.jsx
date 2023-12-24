@@ -3,7 +3,10 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
+import NotFound from '../components/NotFound';
 import { imageService } from '../services/image.service';
+
 
 export default function ImagesPage() {
   const router = useRouter();
@@ -37,8 +40,8 @@ export default function ImagesPage() {
     router.push(`/annotate?id=${id}`)
   }
 
-  if (isLoading) return <div>Loading...</div>
-  if (!images.results) return <div>No images founded!</div>
+  if (isLoading) return <div><Loading /></div>
+  if (!images.results) return <div><NotFound /></div>
 
   return (
     <div>
@@ -47,12 +50,13 @@ export default function ImagesPage() {
       </Head>
 
       <div className='flex justify-center'>
-        <div className="mt-1 md:mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="mt-1 md:mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {images.results.map(image =>
-            <div key={image.id} className='w-64 h-64 border border-base-content hover:scale-110 transition duration-300 cursor-pointer'
+            <div key={image.id} className='w-64 h-64 hover:scale-110 transition duration-300 cursor-pointer'
               onClick={() => goToAnnotatePage(image.id)}
             >
-              <img src={image.image_url} alt={image.image_name} />
+              <img src={image.image_url} alt={image.image_name}
+                className='shadow-[10px_10px_21px_0px] shadow-black/50 rounded-2xl'/>
             </div>  
           )}
         </div>

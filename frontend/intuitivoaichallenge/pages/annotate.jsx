@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import Annotation from '../components/Annotation';
 import CreateAnnotationModal from '../components/CreateAnnotationModal';
+import Loading from '../components/Loading';
+import NotFound from '../components/NotFound';
 import PreviousNextBtns from '../components/PreviousNextBtns';
 import { imageService } from '../services/image.service';
 
@@ -41,8 +43,8 @@ export default function AnnotatePage() {
 		});
 	}
 
-	if (isLoading) return <div>Loading...</div>
-	if (!image) return <div>Image not found!</div>
+	if (isLoading) return <div><Loading /></div>
+	if (!image) return <div><NotFound /></div>
 
 	function createAnnotation(e) {
 		let x = imageRef.current.getBoundingClientRect().left;
@@ -59,12 +61,12 @@ export default function AnnotatePage() {
 			
 			{image &&
 				<div className='flex justify-center'>
-					<div className='relative border border-base-content cursor-pointer'
+					<div className='relative cursor-pointer'
 						style={{
 							height: `${image.height}px`,
 							width: `${image.width}px`
 						}}>
-						<img className='absolute'
+						<img className='absolute shadow-[10px_10px_21px_0px] shadow-black/70 rounded-2xl'
 							ref={imageRef}
 							src={image.image_url}
 							onMouseUp={() => createAnnotation(event)}

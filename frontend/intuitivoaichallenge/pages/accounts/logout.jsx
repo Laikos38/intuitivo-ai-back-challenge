@@ -1,6 +1,7 @@
 "use client"
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Loading from '../../components/Loading';
 import { userService } from '../../services/user.service';
 
 
@@ -16,5 +17,5 @@ export default function Logout() {
     }
   }, []);
 
-	return <div>Loading...</div>
+	return <div><Loading /></div>
 }

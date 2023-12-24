@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 
 import { userService } from '../services/user.service';
 
@@ -16,8 +17,8 @@ export default function HomePage() {
   }, []);
 
 
-  if (isLoading) return <div>Loading...</div>
-  if (!me) return <div>No user data</div>
+  if (isLoading) return <div><Loading /></div>
+  if (!me) return <div>No user data... Weird</div>
 
   return (
     <div>
