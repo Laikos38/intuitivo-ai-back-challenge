@@ -14,12 +14,11 @@ services:
     container_name: intuitivo_backchallenge_backend
     build: ./backend/
     command: >
-      bash -c "python ./backend/manage.py migrate
-      && python ./backend/manage.py load_images
-      && python ./backend/manage.py runserver 0.0.0.0:8000
+      bash -c "python manage.py wait_db
+      && python manage.py migrate
+      && python manage.py load_images
+      && python manage.py runserver 0.0.0.0:8000
       "
-    volumes:
-      - .:/usr/src/app
     environment:
       - DJANGO_SECRET_KEY=wol=bc5--nc_f%429=wdb8-u7=(w5v!6vq*nbo#s_xhrt5!0!n
       - DJANGO_DEBUG=true
