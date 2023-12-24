@@ -3,7 +3,6 @@ export function getApiErrorStr(response) {
     
     Object.entries(response.data)
         .forEach(([field, errors]) => {
-            console.log(field, errors)
             if (typeof errors == "string") {
                 errorListStr = errors
             }

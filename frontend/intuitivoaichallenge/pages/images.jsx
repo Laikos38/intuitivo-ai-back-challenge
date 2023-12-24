@@ -37,7 +37,7 @@ export default function ImagesPage() {
 	}
 
   function goToAnnotatePage(id) {
-    router.push(`/annotate?id=${id}`)
+    router.push(`/annotate?id=${id}&previousPage=${router.query.page || 1}`)
   }
 
   if (isLoading) return <div><Loading /></div>

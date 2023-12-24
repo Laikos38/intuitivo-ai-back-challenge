@@ -30,7 +30,6 @@ export default function LoginPage() {
   function onSubmit({ username, password }) {
     return userService.login(username, password)
       .then((response) => {
-        console.log(response)
         if (response.ok){
           reset();
           router.push('/');

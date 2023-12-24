@@ -20,6 +20,7 @@ export default function AnnotatePage() {
 	const [isLoading, setLoading] = useState(true);
 	const imageRef = useRef(null);
 	let id = router.query.id;
+	let previousPage = router.query.previousPage;
 
 
 	useEffect(() => {
@@ -68,13 +69,21 @@ export default function AnnotatePage() {
 			<Head>
 				<title>IntuitivoAI Challenge | Images</title>
 			</Head>
+
+			<div className='mx-auto ml-5 my-5'>
+				<button type="button" className='btn btn-accent' onClick={() => router.push(`/images?page=${previousPage || 1}`)}>
+				<div className='text-md'>
+					&#8592; Back to Images
+				</div>
+				</button>
+			</div>
 			
 			{image &&
 				<div className='flex justify-center'>
 					<div className='relative cursor-pointer'
 						style={{
-							height: `${image.height}px`,
-							width: `${image.width}px`
+							minHeight: `${image.height}px`,
+							minWidth: `${image.width}px`
 						}}>
 						<img className='absolute shadow-[10px_10px_21px_0px] shadow-black/70 rounded-2xl'
 							ref={imageRef}
