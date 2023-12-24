@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-
 import { userService } from '../../services/user.service';
+import { getApiErrorStr } from '../../utils/helpers';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -32,18 +32,20 @@ export default function RegisterPage() {
 
   function onSubmit({ username, email, password, password_match }) {
     return userService.register(username, email, password, password_match)
-      .then(() => {
-        router.push('/accounts/login?registered=ok');
-      })
-      .catch(error => {
-        let errorListStr = "";
-        Object.entries(error.data)
-            .forEach(([field, errors]) => { 
-              errorListStr = errorListStr + `${field}:\n`; errors.forEach(err => errorListStr = errorListStr + `  - ${err}`)
-            })
-        setError('apiError', {
-          message: errorListStr
-        });
+      .then((response) => {
+        if (response.ok) {
+          router.push('/accounts/login?registered=ok');
+        } else if (response.data) {
+          const errorStr = getApiErrorStr(response);
+          setError('apiError', {
+            message: errorStr
+          });
+        }
+        else {
+          setError('apiError', {
+            message: "Error"
+          });
+        }
       });
   }
   return (
@@ -90,7 +92,7 @@ export default function RegisterPage() {
                 <div className="text-error ">{errors.password_match?.message}</div>
               </div>
               <button disabled={formState.isSubmitting} className="btn btn-primary btn-block">
-                {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                {formState.isSubmitting && <span className="loading loading-spinner loading-sm"></span>}
                 Register
               </button>
             </form>

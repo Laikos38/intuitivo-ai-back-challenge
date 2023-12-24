@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-
 import { userService } from '../../services/user.service';
+import { getApiErrorStr } from '../../utils/helpers';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,18 +24,32 @@ export default function LoginPage() {
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
-  const { register, handleSubmit, setError, formState } = useForm(formOptions);
+  const { register, handleSubmit, setError, formState, reset, resetField } = useForm(formOptions);
   const { errors } = formState;
 
   function onSubmit({ username, password }) {
     return userService.login(username, password)
-      .then(() => {
-        router.push('/');
-      })
-      .catch(error => {
-        setError('apiError', {
-          message: "Error"
-        });
+      .then((response) => {
+        console.log(response)
+        if (response.ok){
+          reset();
+          router.push('/');
+        }
+        else if (response.data) {
+          const errorStr = getApiErrorStr(response);
+          setError('apiError', {
+            message: errorStr
+          });
+          resetField("username");
+          resetField("password");
+        }
+        else {
+          setError('apiError', {
+            message: "Error"
+          });
+          resetField("username");
+          resetField("password");
+        }
       });
   }
 
@@ -80,7 +94,7 @@ export default function LoginPage() {
                   <div className="text-error">{errors.password?.message}</div>
                 </div>
                 <button disabled={formState.isSubmitting} className="btn btn-block btn-primary">
-                  {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                  {formState.isSubmitting && <span className="loading loading-spinner loading-sm"></span>}
                   Login
                 </button>
               </form>

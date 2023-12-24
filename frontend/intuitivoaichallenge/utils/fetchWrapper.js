@@ -64,7 +64,7 @@ function authHeader(url) {
 function handleResponse(response) {
     return response.text().then(response_data => {
         const data = response_data && JSON.parse(response_data);
-        
+
         if (!response.ok) {
             if ([401, 403].includes(response.status_code) && userService.userValue) {
                 userService.logout();

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import Annotation from '../components/Annotation';
-import CreateAnnotationModal from '../components/CreateAnnotationModal';
+import AnnotationModal from '../components/AnnotationModal';
 import Loading from '../components/Loading';
 import NotFound from '../components/NotFound';
 import PreviousNextBtns from '../components/PreviousNextBtns';
@@ -11,8 +11,11 @@ import { imageService } from '../services/image.service';
 
 export default function AnnotatePage() {
 	const router = useRouter();
+	const [showCreateModal, setShowCreateModal] = useState(false);
+	const [showEditModal, setShowEditModal] = useState(false);
 	const [image, setImage] = useState(null);
 	const [annotations, setAnnotations] = useState([]);
+	const [selectedAnnotation, setSelectedAnnotation] = useState(null);
 	const [selectedCoordinates, setSelectedCoordinates] = useState({ x: 0, y: 0 });
 	const [isLoading, setLoading] = useState(true);
 	const imageRef = useRef(null);
@@ -35,6 +38,8 @@ export default function AnnotatePage() {
 			if (response.ok) {
 				setImage(response.data);
 				setAnnotations(response.data.annotations);
+				setShowCreateModal(false);
+				setShowEditModal(false);
 			} else {
 				setImage(null);
 				setAnnotations([]);
@@ -50,7 +55,12 @@ export default function AnnotatePage() {
 		let x = imageRef.current.getBoundingClientRect().left;
 		let y = imageRef.current.getBoundingClientRect().top;
 		setSelectedCoordinates({ x: e.clientX - x, y: e.clientY - y });
-		document.getElementById("createAnnotationModal").showModal();
+		setShowCreateModal(true);
+	}
+
+	function showAnnotation(annotation) {
+		setSelectedAnnotation(annotation);
+		setShowEditModal(true);
 	}
 
 	return (
@@ -76,18 +86,33 @@ export default function AnnotatePage() {
 								coordinates={annotation.coordinates_xy}
 								imageId={image.id}
 								text={annotation.text}
+								id={annotation.id}
 								key={annotation.id}
+								callback={getImage}
+								onClick={() => {showAnnotation(annotation);}}
 							>
 							</Annotation>
 						)}
 					</div>
-					<CreateAnnotationModal
-						modalId={"createAnnotationModal"}
+					<AnnotationModal
+						show={showCreateModal}
+						close={() => setShowCreateModal(false)}
 						imageId={image.id}
 						coordinates={selectedCoordinates}
 						callback={getImage}
 					>
-					</CreateAnnotationModal>
+					</AnnotationModal>
+				
+					<AnnotationModal
+						show={showEditModal}
+						close={() => setShowEditModal(false)}
+						imageId={image.id}
+						coordinates={selectedAnnotation?.coordinates_xy}
+						annotation={selectedAnnotation?.text}
+						annotationId={selectedAnnotation?.id}
+						callback={getImage}
+					>
+					</AnnotationModal>
 				</div>
 			}
 			<PreviousNextBtns previousNextCallback={nextPreviousImage}></PreviousNextBtns>

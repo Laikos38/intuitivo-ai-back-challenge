@@ -21,17 +21,20 @@ export const userService = {
 function login(username, password) {
   return fetchWrapper.post(`${baseUrl}/token/`, { username, password })
     .then(response => {
-      userSubject.next(response.data);
-      localStorage.setItem('token', JSON.stringify(response.data));
-
-      return response.data;
+      if (response.ok) {
+        userSubject.next(response.data);
+        localStorage.setItem('token', JSON.stringify(response.data));
+  
+        return response;
+      }
+      return response;
     });
 }
 
 function register(username, email, password, password_match) {
   return fetchWrapper.post(`${baseUrl}/users/`, { username, email, password, password_match })
     .then(response => {
-      return response.data;
+      return response;
     });
 }
 

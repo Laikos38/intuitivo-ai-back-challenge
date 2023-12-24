@@ -16,6 +16,9 @@ class AnnotationRetrieveUpdateDestroyView(generics.UpdateAPIView, generics.Destr
     def get_queryset(self) -> Queryset[Annotation]:
         return AnnotationPolicy.get_queryset(self.request.user)
 
+    def get_object(self):
+        return AnnotationPolicy.get(self.kwargs["id"], self.request.user)
+
 
 @extend_schema(**annotation_docs.ExtendAnnotationListCreateViewSchema)
 class AnnotationListCreateView(generics.CreateAPIView, generics.ListAPIView):
