@@ -22,7 +22,7 @@ export default function RegisterPage() {
     email: Yup.string().required('Email is required'),
     password: Yup.string().required('Password is required'),
     password_match: Yup.string().required('Password confirmation is required')
-      // .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -86,7 +86,7 @@ export default function RegisterPage() {
                   type="password" {...register('password_match')}
                   placeholder="Password confirmation"
                   name="password_match"
-                  className={`input input-bordered w-full max-w-xs ${errors.password_match ? 'is-invalid' : ''}`} />
+                  className={`input input-bordered w-full max-w-xs ${errors.password_match ? 'input-error' : ''}`} />
                 <div className="text-error ">{errors.password_match?.message}</div>
               </div>
               <button disabled={formState.isSubmitting} className="btn btn-primary btn-block">

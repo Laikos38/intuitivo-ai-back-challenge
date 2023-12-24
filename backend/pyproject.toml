@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "intuitivo-ai-back-challenge"
+name = "backchallenge"
 version = "0.1.0"
 description = "Intuitivo AI back challenge"
 authors = ["Francisco Maurino"]

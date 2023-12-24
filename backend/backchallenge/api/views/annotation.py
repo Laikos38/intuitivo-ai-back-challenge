@@ -4,7 +4,8 @@ from backchallenge.api.serializers.annotation import AnnotationSerializer
 from backchallenge.core.models import Annotation
 from backchallenge.types import Queryset
 from drf_spectacular.utils import extend_schema
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
 
 
 @extend_schema(**annotation_docs.ExtendAnnotationRetrieveUpdateDestroyViewSchema)
@@ -22,3 +23,15 @@ class AnnotationListCreateView(generics.CreateAPIView, generics.ListAPIView):
 
     def get_queryset(self) -> Queryset[Annotation]:
         return AnnotationPolicy.get_queryset(self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        Annotation.objects.create(
+            user_id=request.user.id,
+            image_id=serializer.validated_data["image_id"],
+            coordinates_xy=serializer.validated_data["coordinates_xy"],
+            text=serializer.validated_data["text"],
+        )
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

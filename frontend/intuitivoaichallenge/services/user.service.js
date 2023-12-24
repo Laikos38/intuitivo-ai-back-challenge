@@ -20,18 +20,18 @@ export const userService = {
 
 function login(username, password) {
   return fetchWrapper.post(`${baseUrl}/token/`, { username, password })
-    .then(user => {
-      userSubject.next(user);
-      localStorage.setItem('token', JSON.stringify(user));
+    .then(response => {
+      userSubject.next(response.data);
+      localStorage.setItem('token', JSON.stringify(response.data));
 
-      return user;
+      return response.data;
     });
 }
 
 function register(username, email, password, password_match) {
   return fetchWrapper.post(`${baseUrl}/users/`, { username, email, password, password_match })
-    .then(user => {
-      return user;
+    .then(response => {
+      return response.data;
     });
 }
 

@@ -70,9 +70,9 @@ function handleResponse(response) {
                 userService.logout();
             }
             
-            return Promise.reject(data);
+            return data;
         }
 
-        return data.data;
+        return data;
     });
 }

@@ -1,5 +1,8 @@
 from backchallenge.api.docs import image as image_docs
-from backchallenge.api.serializers.image import ImageSerializer
+from backchallenge.api.serializers.image import (
+    ImageSerializer,
+    ImageWithAnnotationsSerializer,
+)
 from backchallenge.core.models import Image
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics
@@ -7,7 +10,7 @@ from rest_framework import generics
 
 @extend_schema(**image_docs.ExtendImageRetrieveUpdateDestroyViewSchema)
 class ImageRetrieveUpdateDestroyView(generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView):
-    serializer_class = ImageSerializer
+    serializer_class = ImageWithAnnotationsSerializer
     queryset = Image.objects.all()
     lookup_field = "id"
 

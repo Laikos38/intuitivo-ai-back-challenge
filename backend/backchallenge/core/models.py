@@ -7,7 +7,15 @@ from model_utils.models import TimeStampedModel
 
 
 class Image(TimeStampedModel):
-    image = models.ImageField(null=False, blank=False, upload_to="images/")
+    image = models.ImageField(
+        null=False,
+        blank=False,
+        upload_to="images/",
+        height_field="height",
+        width_field="width",
+    )
+    height = models.IntegerField()
+    width = models.IntegerField()
 
     class Meta:
         ordering = ("-created",)

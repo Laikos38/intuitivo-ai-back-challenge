@@ -8,8 +8,8 @@ export default function HomePage() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    userService.getUser().then(me => {
-      setMe(me);
+    userService.getUser().then(response => {
+      setMe(response.data);
       setLoading(false);
     }
     );
