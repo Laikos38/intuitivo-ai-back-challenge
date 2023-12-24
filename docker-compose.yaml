@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  intuitivoai_db:
+    image: postgres
+    container_name: intuitivoai_db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=intuitivo_backchallenge
+    ports:
+      - "7898:5432"
+
+  intuitivoai_backend:
+    container_name: intuitivo_backchallenge_backend
+    build: ./backend/
+    command: >
+      bash -c "python ./backend/manage.py migrate
+      && python ./backend/manage.py load_images
+      && python ./backend/manage.py runserver 0.0.0.0:8000
+      "
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - DJANGO_SECRET_KEY=wol=bc5--nc_f%429=wdb8-u7=(w5v!6vq*nbo#s_xhrt5!0!n
+      - DJANGO_DEBUG=true
+      - DJANGO_ALLOWED_HOST=*
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=intuitivo_backchallenge
+      - POSTGRES_HOST=intuitivoai_db
+      - POSTGRES_PORT=5432
+      - DB_IGNORE_SSL=true
+    depends_on:
+      - intuitivoai_db
+    ports:
+      - "7171:8000"
+
+  intuitivoai_frontend:
+    container_name: intuitivo_backchallenge_frontend
+    build: ./frontend/intuitivoaichallenge/
+    command: "npm run dev"
+    environment:
+      - BACK_URL=http://0.0.0.0:7171/api
+    depends_on:
+      - intuitivoai_db
+      - intuitivoai_backend
+    ports:
+      - "7172:3000"
