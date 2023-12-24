@@ -1,7 +1,7 @@
 export default function PreviousNextBtns({ previousNextCallback}) {
 
     return (
-        <div className='flex justify-around mx-auto'>
+        <div className='flex justify-around mx-auto mt-6'>
             <button className='btn btn-outline btn-md text-lg'
                 onClick={() => { previousNextCallback(true) }}>&#8592;</button>
             <button className='btn btn-outline btn-md text-lg'
