@@ -57,6 +57,7 @@ Navigate to `http://localhost:8000` (host) or `http://localhost:7171` (docker) t
 Things to improve:
 - Add code comments
 - Add integration and unit tests
+- Dont use development server on docker compose.
 
 ## Frontend project
 
@@ -67,3 +68,4 @@ Navigate to `http://localhost:3000` (host) or `http://localhost:7172` (docker) t
 Things to improve:
 - Never used React or NextJS before, so there is a lot of things that I'm sure can be improved. Taking in mind that only have 5 days to code the entire project during Christmas time and working full time, I consider to be good enough.
 - Add Keypresses to navigate between images during annotations.
+- Dont use development server on docker compose.
